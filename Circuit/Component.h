@@ -11,9 +11,9 @@ public:
 	CComponent(sf::Vector2f position, const std::string& fileLocation = "../images/default.png");
 	~CComponent() {}
 
-	virtual void SetPosition(const sf::Vector2f& pos) 
-	{ 		
-		mSprite.setPosition(pos); 
+	virtual void SetPosition(const sf::Vector2f& pos)
+	{
+		mSprite.setPosition(pos);
 	}
 
 	void DisplayPosition() const

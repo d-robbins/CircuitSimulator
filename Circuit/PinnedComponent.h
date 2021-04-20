@@ -47,6 +47,8 @@ public:
 
 		void AttachWire(CWire* wire) { mWire = wire; }
 
+		sf::FloatRect GetGlobalBound() { return mPin.getGlobalBounds(); }
+
 	private:
 		CWire* mWire = nullptr;
 		sf::RectangleShape mPin;
@@ -74,6 +76,8 @@ public:
 			context.draw(mPin);
 		}
 
+		sf::FloatRect GetGlobalBound() { return mPin.getGlobalBounds(); }
+
 		void SetPos(const sf::Vector2f& pos)
 		{
 			mPin.setPosition(pos);
@@ -95,13 +99,12 @@ public:
 		sf::Vector2f mPos;
 	};
 
+	InputPin* PinInHitTest(const sf::Vector2f& pos);
+	OutputPin* PinOutHitTest(const sf::Vector2f& pos);
+
 	void CreateInputPin();
 	void CreateOutputPin();
-
-	void AttachWireInput(CWire* wire);
-	void AttachWireOutput(CWire* wire);
-
-	virtual void SendPower();
+	virtual void SendPower(bool pow);
 
 private:
 	std::vector<std::shared_ptr<OutputPin>> mOutputPins;

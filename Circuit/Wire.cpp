@@ -59,7 +59,19 @@ void CWire::Render(sf::RenderWindow& context)
 
 void CWire::PropogatePower(bool pow)
 {
-	this->mInputPin->ReceivePower(pow);
+	std::cout << "Wire Powered!\n";
 	this->mState = true;
-	std::cout << "WIRE POWERED\n";
+	this->mInputPin->ReceivePower(pow);
+}
+
+bool CWire::Good()
+{
+	if (mInputPin != nullptr && mOutputPin != nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

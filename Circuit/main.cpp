@@ -19,17 +19,14 @@ int main()
     auto comp = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 500));
     comp->CreateInputPin();
     comp->CreateOutputPin();
-    comp->AttachWireInput(&wire);
 
     auto comp2 = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 600));
-    comp2->CreateInputPin();
     comp2->CreateOutputPin();
-    comp2->AttachWireOutput(&wire);
 
     board.AddComponent(comp);
     board.AddComponent(comp2);
 
-    comp2->SendPower();
+    bool toggle = false;
 
     while (window.isOpen())
     {
@@ -43,11 +40,22 @@ int main()
                 auto pos = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
                 board.OnClick(pos);
             }
+            else if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::P)
+                {
+                    //board.SendPower(comp2);
+                    board.WireMode(!toggle);
+                }
+                else if (event.key.code == sf::Keyboard::Q)
+                {
+                    board.SendPower(comp2);
+                }
+            }
         }
 
         window.clear(white);
         board.Render(window, event);
-        wire.Render(window);
         window.display();
     }
 

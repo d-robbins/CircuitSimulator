@@ -28,14 +28,35 @@ void CPinnedComponent::Render(sf::RenderWindow& context)
 
 void CPinnedComponent::ReceivePower(bool pow)
 {
-	if (pow)
+	std::cout << "Component Recieved Power!\n";
+}
+
+CPinnedComponent::InputPin* CPinnedComponent::PinInHitTest(const sf::Vector2f& pos)
+{
+	for (auto& i : mInputPins)
 	{
-		this->SetColor(sf::Color::Red);
+		if (i->GetGlobalBound().contains(pos))
+		{
+			return i.get();
+			break;
+		}
 	}
-	else
+
+	return nullptr;
+}
+
+CPinnedComponent::OutputPin* CPinnedComponent::PinOutHitTest(const sf::Vector2f& pos)
+{
+	for (auto& i : mOutputPins)
 	{
-		this->SetColor(sf::Color::Black);
+		if (i->GetGlobalBound().contains(pos))
+		{
+			return i.get();
+			break;
+		}
 	}
+
+	return nullptr;
 }
 
 void CPinnedComponent::CreateInputPin()
@@ -50,19 +71,9 @@ void CPinnedComponent::CreateOutputPin()
 	mOutputPins.push_back(pin);
 }
 
-void CPinnedComponent::AttachWireInput(CWire* wire)
+void CPinnedComponent::SendPower(bool pow)
 {
-	wire->SetInputPin(mInputPins[0].get());
-}
-
-void CPinnedComponent::AttachWireOutput(CWire* wire)
-{
-	wire->SetOutputPin(mOutputPins[0].get());
-}
-
-void CPinnedComponent::SendPower()
-{
-	mOutputPins[0]->PropogatePower(true);
+	mOutputPins[0]->PropogatePower(pow);
 }
 
 void CPinnedComponent::OutputPin::PropogatePower(bool pow)

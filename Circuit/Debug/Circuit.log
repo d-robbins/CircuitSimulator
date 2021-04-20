@@ -1,4 +1,12 @@
-﻿  PinnedComponent.cpp
-  Wire.cpp
-  Generating Code...
+﻿  Board.cpp
+C:\Users\David\source\repos\Circuit\Circuit\Board.cpp(15,73): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\David\source\repos\Circuit\Circuit\Board.cpp(15,55): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   Circuit.vcxproj -> C:\Users\David\source\repos\Circuit\Debug\Circuit.exe

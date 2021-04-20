@@ -19,6 +19,8 @@ public:
 
 	void PropogatePower(bool power);
 
+	bool Good();
+
 private:
 	CPinnedComponent::InputPin* mInputPin = nullptr;
 	CPinnedComponent::OutputPin* mOutputPin= nullptr;
