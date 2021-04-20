@@ -1,0 +1,6 @@
+System contains a board that components can be placed on. 
+Components can 'pass' or 'block' power from flowing through.
+Each component requires some configuration to allow power to flow through.
+Components are connected via wires that connect each component via pins that
+components have. Some components are static on/off switches that can provide power 
+or not.
