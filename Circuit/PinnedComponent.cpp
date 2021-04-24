@@ -3,8 +3,8 @@
 #include "Wire.h"
 
 
-CPinnedComponent::CPinnedComponent(sf::Vector2f pos)
-	: CComponent(pos)
+CPinnedComponent::CPinnedComponent(sf::Vector2f pos, const std::string& fileLocation)
+	: CComponent(pos, fileLocation)
 {
 	mInLoc = sf::Vector2f(-GetWidth() / 2, GetHeight() / 2);
 	mOutLoc = sf::Vector2f(GetWidth() / 2, GetHeight() / 2);
@@ -29,18 +29,35 @@ void CPinnedComponent::Render(sf::RenderWindow& context)
 
 void CPinnedComponent::ReceivePower(bool pow)
 {
-	std::cout << "Component Recieved Power!\n";
+	std::cout << "Pinned Component Recieved Power!\n";
+
+	for (auto i : mOutputPins)
+	{
+		i->ProcessPower(pow);
+	}
 }
 
-void CPinnedComponent::AddInputPin()
+void CPinnedComponent::AddInputPin(sf::Vector2f pos)
 {
-	mInputPins.push_back(std::make_shared<CPinIn>(GetPosition() + mInLoc
+	mInputPins.push_back(std::make_shared<CPinIn>(GetPosition() + pos
 		, this, "../images/ipin.png"));
+	
+	if (pos == sf::Vector2f(0, 0))
+	{
+		pos = mInLoc;
+		mInputPins.back()->SetPinPos(mInLoc);
+	}
 }
 
-void CPinnedComponent::AddOutputPin()
+void CPinnedComponent::AddOutputPin(sf::Vector2f pos)
 {
-	mOutputPins.push_back(std::make_shared<CPinOut>(GetPosition() + mOutLoc, "../images/opin.png"));
+	mOutputPins.push_back(std::make_shared<CPinOut>(GetPosition() + pos, "../images/opin.png"));
+
+	if (pos == sf::Vector2f(0, 0))
+	{
+		pos = mInLoc;
+		mOutputPins.back()->SetPinPos(mOutLoc);
+	}
 }
 
 bool CPinnedComponent::InPinHitTest(sf::Vector2f pos)
@@ -71,16 +88,24 @@ bool CPinnedComponent::OutPinHitTest(sf::Vector2f pos)
 	return false;
 }
 
+void CPinnedComponent::PropogatePower(bool power)
+{
+	for (auto i : mOutputPins)
+	{
+		i->ProcessPower(power);
+	}
+}
+
 void CPinnedComponent::UpdatePin()
 {
 	for (auto i : mInputPins)
 	{
-		i->SetPosition(GetPosition() + mInLoc);
+		i->SetPosition(GetPosition() + i->GetPinPos());
 	}
 	
 	for (auto i : mOutputPins)
 	{
-		i->SetPosition(GetPosition() + mOutLoc);
+		i->SetPosition(GetPosition() + i->GetPinPos());
 	}
 
 }

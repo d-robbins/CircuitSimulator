@@ -17,7 +17,7 @@ public:
 
 	void PropogatePower(bool power);
 	
-	void SetInputPin(CPinIn* pin) { mIn = pin; }
+	void SetInputPin(CPinIn* pin) { mIn = pin; pin->SetWire(this); }
 	void SetOutPut(CPinOut* pin) { mOut = pin; }
 
 	bool Good() { return ((mIn != nullptr) && (mOut != nullptr)); }

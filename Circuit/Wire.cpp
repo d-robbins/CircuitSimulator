@@ -27,7 +27,6 @@ void CWire::Render(sf::RenderWindow& context)
 		{
 			a, b
 		};
-
 		
 		context.draw(line, 2, sf::Lines);		
 	}
@@ -36,4 +35,8 @@ void CWire::Render(sf::RenderWindow& context)
 
 void CWire::PropogatePower(bool pow)
 {
+	if (mIn != nullptr)
+	{
+		mIn->ReceivePower(pow);
+	}
 }

@@ -19,11 +19,14 @@ public:
 
 	void OnClick(const sf::Vector2f& mousePos);
 
-	void SendPower(bool power);
+	void PowerToggle(bool power);
 	void Tick(double elapsed);
 
 	void WireMode(bool on);
 private:
+	
+	void AddWire(sf::Vector2f mousePos);
+	
 	std::vector<std::shared_ptr<CPinnedComponent>> mComponents;
 	
 	std::vector<std::shared_ptr<CWire>> mWires;
@@ -32,7 +35,7 @@ private:
 	
 	bool mIn = false, mOut = false;
 
-	bool mPowerOn = false;
+	bool mPowerMode = false;
 	bool mWireMode = false;
 };
 

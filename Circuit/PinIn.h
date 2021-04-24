@@ -13,7 +13,15 @@ public:
 	~CPinIn() {}
 
 	sf::Vector2f GetCompPos();
+	void ReceivePower(bool power);
+
+	void SetWire(CWire* wire);
+	CWire* GetWire();
+
+	bool PowerOn() { return mPower; }
 private:
 	CPinnedComponent* mComp = nullptr;
+	CWire* mWire = nullptr;
+	bool mPower = false;
 };
 

@@ -32,7 +32,7 @@ public:
 	
 	sf::Vector2f GetPosition() const { return mSprite.getPosition(); }
 
-	void SetSize(sf::Vector2f size);
+	virtual void PropogatePower(bool power) {}
 
 	int GetHeight() const { return mSprite.getTextureRect().height; }
 	int GetWidth() const { return mSprite.getTextureRect().width; }

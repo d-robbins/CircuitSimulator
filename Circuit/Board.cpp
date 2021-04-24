@@ -21,7 +21,6 @@ void CBoard::Render(sf::RenderWindow& window, sf::Event& evnt)
 	{
 		i->Render(window);
 	}
-	
 
 	for (auto i : mComponents)
 	{
@@ -38,9 +37,9 @@ void CBoard::OnClick(const sf::Vector2f& mousePos)
 {
 	if (mGrabbed == nullptr)
 	{
-		for (auto &comp : mComponents)
+		if (!mWireMode && !mPowerMode)
 		{
-			if (!mWireMode)
+			for (auto &comp : mComponents)
 			{
 				if (comp->HitTest(mousePos))
 				{
@@ -48,39 +47,21 @@ void CBoard::OnClick(const sf::Vector2f& mousePos)
 					break;
 				}
 			}
-			else
+		}
+		else if (mWireMode && !mPowerMode)
+		{
+			AddWire(mousePos);
+		}
+		else if (mPowerMode && !mWireMode)
+		{
+			for (auto& comp : mComponents)
 			{
-				CInPinVisitor ivisitor;
-				ivisitor.SetLoc(mousePos);
-				for (auto i : mComponents)
+				if (comp->HitTest(mousePos))
 				{
-					i->Accept(&ivisitor);
+					comp->PropogatePower(true);
+					mPowerMode = false;
+					break;
 				}
-
-				COutPinVisitor ovisitor;
-				ovisitor.SetLoc(mousePos);
-				for (auto i : mComponents)
-				{
-					i->Accept(&ovisitor);
-				}
-
-				CPinIn* ipin = nullptr;
-				CPinOut* opin = nullptr;
-
-				ipin = ivisitor.GetPin();
-				opin = ovisitor.GetPin();
-
-				if (ipin != nullptr)
-				{
-					mWires.back()->SetInputPin(ipin);
-				}
-
-				if (opin != nullptr)
-				{
-					mWires.back()->SetOutPut(opin);
-				}
-
-				mWireMode = !mWires.back()->Good();
 			}
 		}
 	}
@@ -90,9 +71,9 @@ void CBoard::OnClick(const sf::Vector2f& mousePos)
 	}
 }
 
-void CBoard::SendPower(bool power)
+void CBoard::PowerToggle(bool power)
 {
-	mPowerOn = power;
+	mPowerMode = power;
 }
 
 void CBoard::Tick(double elapsed)
@@ -106,4 +87,39 @@ void CBoard::WireMode(bool on)
 
 	if (on)
 		this->mWires.push_back(std::make_shared<CWire>());
+}
+
+void CBoard::AddWire(sf::Vector2f mousePos)
+{
+	CInPinVisitor ivisitor;
+	ivisitor.SetLoc(mousePos);
+	for (auto i : mComponents)
+	{
+		i->Accept(&ivisitor);
+	}
+
+	COutPinVisitor ovisitor;
+	ovisitor.SetLoc(mousePos);
+	for (auto i : mComponents)
+	{
+		i->Accept(&ovisitor);
+	}
+
+	CPinIn* ipin = nullptr;
+	CPinOut* opin = nullptr;
+
+	ipin = ivisitor.GetPin();
+	opin = ovisitor.GetPin();
+
+	if (ipin != nullptr)
+	{
+		mWires.back()->SetInputPin(ipin);
+	}
+
+	if (opin != nullptr)
+	{
+		opin->AddWire(mWires.back());
+	}
+
+	mWireMode = !mWires.back()->Good();
 }
