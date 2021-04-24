@@ -4,7 +4,7 @@
 #include "Board.h"
 #include "Component.h"
 #include "Wire.h"
-#include "ANDGate.h"
+#include "gates/ANDGate.h"
 
 int main()
 {
@@ -23,7 +23,6 @@ int main()
     auto comp = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 500));
     comp->AddOutputPin();
     board->AddComponent(comp);
-
 
     bool toggle = false;
     bool powerToggle = false;

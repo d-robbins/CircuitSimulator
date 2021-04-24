@@ -48,10 +48,10 @@
     <ClCompile Include="OutPinVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LogicGate.cpp">
+    <ClCompile Include="gates\ANDGate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ANDGate.cpp">
+    <ClCompile Include="gates\LogicGate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,10 +86,10 @@
     <ClInclude Include="OutPinVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LogicGate.h">
+    <ClInclude Include="gates\ANDGate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ANDGate.h">
+    <ClInclude Include="gates\LogicGate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

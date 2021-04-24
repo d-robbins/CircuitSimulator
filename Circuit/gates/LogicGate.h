@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PinnedComponent.h"
+#include "../PinnedComponent.h"
 
 
 class CLogicGate : public CPinnedComponent

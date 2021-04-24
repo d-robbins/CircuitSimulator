@@ -1,15 +1,25 @@
-﻿  Board.cpp
-C:\Users\David\source\repos\Circuit\Circuit\Board.cpp(17,73): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+﻿  ANDGate.cpp
+C:\Users\David\source\repos\Circuit\Circuit\gates\ANDGate.cpp(6,61): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\David\source\repos\Circuit\Circuit\Board.cpp(17,55): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\David\source\repos\Circuit\Circuit\gates\ANDGate.cpp(6,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-  Wire.cpp
+C:\Users\David\source\repos\Circuit\Circuit\gates\ANDGate.cpp(7,61): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\David\source\repos\Circuit\Circuit\gates\ANDGate.cpp(7,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  LogicGate.cpp
   main.cpp
 C:\Users\David\source\repos\Circuit\Circuit\main.cpp(40,79): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with

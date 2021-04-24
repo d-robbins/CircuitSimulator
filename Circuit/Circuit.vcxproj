@@ -145,11 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ANDGate.cpp" />
+    <ClCompile Include="gates\ANDGate.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="InPinVisitor.cpp" />
-    <ClCompile Include="LogicGate.cpp" />
+    <ClCompile Include="gates\LogicGate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OutPinVisitor.cpp" />
     <ClCompile Include="Pin.cpp" />
@@ -160,11 +160,11 @@
     <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ANDGate.h" />
+    <ClInclude Include="gates\ANDGate.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="InPinVisitor.h" />
-    <ClInclude Include="LogicGate.h" />
+    <ClInclude Include="gates\LogicGate.h" />
     <ClInclude Include="OutPinVisitor.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="PinIn.h" />
