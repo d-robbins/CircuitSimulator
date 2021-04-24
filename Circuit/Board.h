@@ -20,6 +20,7 @@ public:
 	void OnClick(const sf::Vector2f& mousePos);
 
 	void PowerToggle(bool power);
+
 	void Tick(double elapsed);
 
 	void WireMode(bool on);

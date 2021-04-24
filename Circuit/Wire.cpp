@@ -35,6 +35,11 @@ void CWire::Render(sf::RenderWindow& context)
 
 void CWire::PropogatePower(bool pow)
 {
+	if (pow)
+		mState = true;
+	else
+		mState = false;
+
 	if (mIn != nullptr)
 	{
 		mIn->ReceivePower(pow);
