@@ -7,24 +7,40 @@
 
 int main()
 {
+
+    std::cout << sizeof(double) << std::endl;
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
 
     window.setFramerateLimit(60);
 
     const auto white = sf::Color(255, 255, 255, 255);
+
     CBoard board;
 
     CWire wire;
 
     auto comp = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 500));
-    comp->CreateInputPin();
-    comp->CreateOutputPin();
+    comp->AddInputPin();
+    comp->AddOutputPin();
+
 
     auto comp2 = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 600));
-    comp2->CreateOutputPin();
+    comp2->AddInputPin();
+    comp2->AddOutputPin();
+
+    auto comp3 = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 600));
+    comp3->AddInputPin();
+    comp3->AddOutputPin();
+
+    auto comp4 = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 600));
+    comp4->AddInputPin();
+    comp4->AddOutputPin();
+
 
     board.AddComponent(comp);
     board.AddComponent(comp2);
+    board.AddComponent(comp3);
+    board.AddComponent(comp4);
 
     bool toggle = false;
 
@@ -44,12 +60,10 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::P)
                 {
-                    //board.SendPower(comp2);
                     board.WireMode(!toggle);
                 }
                 else if (event.key.code == sf::Keyboard::Q)
                 {
-                    board.SendPower(comp2);
                 }
             }
         }

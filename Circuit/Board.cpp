@@ -1,6 +1,8 @@
 #include "Board.h"
 
 #include <SFML/Window.hpp>
+#include "InPinVisitor.h"
+#include "OutPinVisitor.h"
 
 
 CBoard::CBoard()
@@ -19,6 +21,7 @@ void CBoard::Render(sf::RenderWindow& window, sf::Event& evnt)
 	{
 		i->Render(window);
 	}
+	
 
 	for (auto i : mComponents)
 	{
@@ -35,9 +38,9 @@ void CBoard::OnClick(const sf::Vector2f& mousePos)
 {
 	if (mGrabbed == nullptr)
 	{
-		if (!mWireMode)
+		for (auto &comp : mComponents)
 		{
-			for (auto &comp : mComponents)
+			if (!mWireMode)
 			{
 				if (comp->HitTest(mousePos))
 				{
@@ -45,27 +48,39 @@ void CBoard::OnClick(const sf::Vector2f& mousePos)
 					break;
 				}
 			}
-		}
-		else
-		{
-			if (mWires.back()->Good())
-			{
-				mWireMode = false;
-			}
 			else
 			{
+				CInPinVisitor ivisitor;
+				ivisitor.SetLoc(mousePos);
 				for (auto i : mComponents)
 				{
-					if (i->PinInHitTest(mousePos) != nullptr)
-					{
-						mWires.back()->SetInputPin(i->PinInHitTest(mousePos));
-					}
-
-					if (i->PinOutHitTest(mousePos) != nullptr)
-					{
-						mWires.back()->SetOutputPin(i->PinOutHitTest(mousePos));
-					}
+					i->Accept(&ivisitor);
 				}
+
+				COutPinVisitor ovisitor;
+				ovisitor.SetLoc(mousePos);
+				for (auto i : mComponents)
+				{
+					i->Accept(&ovisitor);
+				}
+
+				CPinIn* ipin = nullptr;
+				CPinOut* opin = nullptr;
+
+				ipin = ivisitor.GetPin();
+				opin = ovisitor.GetPin();
+
+				if (ipin != nullptr)
+				{
+					mWires.back()->SetInputPin(ipin);
+				}
+
+				if (opin != nullptr)
+				{
+					mWires.back()->SetOutPut(opin);
+				}
+
+				mWireMode = !mWires.back()->Good();
 			}
 		}
 	}
@@ -75,9 +90,14 @@ void CBoard::OnClick(const sf::Vector2f& mousePos)
 	}
 }
 
-void CBoard::SendPower(std::shared_ptr<CPinnedComponent> comp)
+void CBoard::SendPower(bool power)
 {
-	comp->SendPower(true);
+	mPowerOn = power;
+}
+
+void CBoard::Tick(double elapsed)
+{
+	
 }
 
 void CBoard::WireMode(bool on)

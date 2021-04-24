@@ -2,28 +2,29 @@
 
 #include "Wire.h"
 
+
 CPinnedComponent::CPinnedComponent(sf::Vector2f pos)
 	: CComponent(pos)
 {
-	
+	mInLoc = sf::Vector2f(-GetWidth() / 2, GetHeight() / 2);
+	mOutLoc = sf::Vector2f(GetWidth() / 2, GetHeight() / 2);
 }
 
 void CPinnedComponent::Render(sf::RenderWindow& context)
 {
-	CComponent::Render(context);
-
+	UpdatePin();
+	
 	for (auto i : mInputPins)
 	{
-		i->SetPos(sf::Vector2f(GetPosition().x - 40, GetPosition().y + (GetHeight() / 2) - 5));
 		i->Render(context);
 	}
 
 	for (auto i : mOutputPins)
 	{
-		i->SetPos(sf::Vector2f(GetPosition().x + GetWidth(), GetPosition().y + (GetHeight() / 2) - 5));
 		i->Render(context);
 	}
 	
+	CComponent::Render(context);
 }
 
 void CPinnedComponent::ReceivePower(bool pow)
@@ -31,55 +32,56 @@ void CPinnedComponent::ReceivePower(bool pow)
 	std::cout << "Component Recieved Power!\n";
 }
 
-CPinnedComponent::InputPin* CPinnedComponent::PinInHitTest(const sf::Vector2f& pos)
+void CPinnedComponent::AddInputPin()
+{
+	mInputPins.push_back(std::make_shared<CPinIn>(GetPosition() + mInLoc
+		, this, "../images/ipin.png"));
+}
+
+void CPinnedComponent::AddOutputPin()
+{
+	mOutputPins.push_back(std::make_shared<CPinOut>(GetPosition() + mOutLoc, "../images/opin.png"));
+}
+
+bool CPinnedComponent::InPinHitTest(sf::Vector2f pos)
 {
 	for (auto& i : mInputPins)
 	{
-		if (i->GetGlobalBound().contains(pos))
+		if (i->HitTest(pos))
 		{
-			return i.get();
-			break;
+			mLIn = i.get();
+			return true;
 		}
 	}
 
-	return nullptr;
+	return false;
 }
 
-CPinnedComponent::OutputPin* CPinnedComponent::PinOutHitTest(const sf::Vector2f& pos)
+bool CPinnedComponent::OutPinHitTest(sf::Vector2f pos)
 {
-	for (auto& i : mOutputPins)
+	for (auto &i : mOutputPins)
 	{
-		if (i->GetGlobalBound().contains(pos))
+		if (i->HitTest(pos))
 		{
-			return i.get();
-			break;
+			mLOut = i.get();
+			return true;
 		}
 	}
 
-	return nullptr;
+	return false;
 }
 
-void CPinnedComponent::CreateInputPin()
+void CPinnedComponent::UpdatePin()
 {
-	auto pin = std::make_shared<InputPin>(this);
-	mInputPins.push_back(pin);
-}
-
-void CPinnedComponent::CreateOutputPin()
-{
-	auto pin = std::make_shared<OutputPin>(this);
-	mOutputPins.push_back(pin);
-}
-
-void CPinnedComponent::SendPower(bool pow)
-{
-	mOutputPins[0]->PropogatePower(pow);
-}
-
-void CPinnedComponent::OutputPin::PropogatePower(bool pow)
-{
-	if (mWire != nullptr)
+	for (auto i : mInputPins)
 	{
-		mWire->PropogatePower(pow);
+		i->SetPosition(GetPosition() + mInLoc);
 	}
+	
+	for (auto i : mOutputPins)
+	{
+		i->SetPosition(GetPosition() + mOutLoc);
+	}
+
 }
+

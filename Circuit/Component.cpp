@@ -29,4 +29,5 @@ bool CComponent::HitTest(const sf::Vector2f& pos)
 		return false;
 	}
 }
+
  

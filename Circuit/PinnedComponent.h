@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Component.h"
+#include "PinIn.h"
+#include "PinOut.h"
 
 #include <vector>
 
@@ -16,98 +18,24 @@ public:
 
 	void ReceivePower(bool pow);
 
-	class OutputPin
-	{
-	public:
-		OutputPin(CPinnedComponent* component)
-		{
-			auto pos = component->GetPosition();
-			auto hit = component->GetHeight();
-			auto wid = component->GetWidth();
-			mPin.setSize(sf::Vector2f(40, 10));
-			mPin.setFillColor(sf::Color::Red);
-			mPin.setPosition(sf::Vector2f(pos.x + wid, pos.y + (hit / 2)));
-		}
+	void AddInputPin();
+	void AddOutputPin();
 
-		void Render(sf::RenderWindow& context)
-		{
-			context.draw(mPin);
-		}
+	bool InPinHitTest(sf::Vector2f pos);
+	bool OutPinHitTest(sf::Vector2f pos);
 
-		void PropogatePower(bool pow);
+	virtual void Accept(CPinVisitor* visitor) override { visitor->VisitPinnedComponent(this); };
 
-		//OutputPin() = delete;
-		
-		void SetPos(const sf::Vector2f& pos)
-		{
-			mPin.setPosition(pos);
-		}
-
-		sf::Vector2f GetPosition() const { return mPin.getPosition(); }
-
-		void AttachWire(CWire* wire) { mWire = wire; }
-
-		sf::FloatRect GetGlobalBound() { return mPin.getGlobalBounds(); }
-
-	private:
-		CWire* mWire = nullptr;
-		sf::RectangleShape mPin;
-		sf::Vector2f mPos;
-	};
-
-	class InputPin
-	{
-	public:
-		InputPin(CPinnedComponent* component)
-		{
-			mComponent = component;
-			auto pos = component->GetPosition();
-			auto hit = component->GetHeight();
-			auto wid = component->GetWidth();
-			mPin.setSize(sf::Vector2f(40, 10));
-			mPin.setFillColor(sf::Color::Black);
-			mPin.setPosition(sf::Vector2f(pos.x - 40, pos.y + (hit / 2)));
-		}
-		
-		//InputPin() = delete;
-
-		void Render(sf::RenderWindow& context)
-		{
-			context.draw(mPin);
-		}
-
-		sf::FloatRect GetGlobalBound() { return mPin.getGlobalBounds(); }
-
-		void SetPos(const sf::Vector2f& pos)
-		{
-			mPin.setPosition(pos);
-		}
-
-		sf::Vector2f GetPosition() const { return mPin.getPosition(); }
-
-		void ReceivePower(bool pow)
-		{
-			mComponent->ReceivePower(pow);
-		}
-
-		void AttachWire(CWire* wire) { mWire = wire; }
-
-	private:
-		CWire* mWire = nullptr;
-		CPinnedComponent* mComponent = nullptr;
-		sf::RectangleShape mPin;
-		sf::Vector2f mPos;
-	};
-
-	InputPin* PinInHitTest(const sf::Vector2f& pos);
-	OutputPin* PinOutHitTest(const sf::Vector2f& pos);
-
-	void CreateInputPin();
-	void CreateOutputPin();
-	virtual void SendPower(bool pow);
-
+	CPinOut* GetLOut() { return mLOut; }
+	CPinIn* GetLIn() { return mLIn; }
 private:
-	std::vector<std::shared_ptr<OutputPin>> mOutputPins;
-	std::vector<std::shared_ptr<InputPin>> mInputPins;
+	void UpdatePin();
+
+	CPinIn* mLIn = nullptr;
+	CPinOut* mLOut = nullptr;
+
+	sf::Vector2f mInLoc, mOutLoc;
+	std::vector<std::shared_ptr<CPinIn>> mInputPins;
+	std::vector<std::shared_ptr<CPinOut>> mOutputPins;
 };
 

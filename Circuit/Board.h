@@ -19,15 +19,20 @@ public:
 
 	void OnClick(const sf::Vector2f& mousePos);
 
-	void SendPower(std::shared_ptr<CPinnedComponent> comp);
+	void SendPower(bool power);
+	void Tick(double elapsed);
 
 	void WireMode(bool on);
 private:
 	std::vector<std::shared_ptr<CPinnedComponent>> mComponents;
-	std::shared_ptr<CPinnedComponent>* mGrabbed = nullptr;
+	
 	std::vector<std::shared_ptr<CWire>> mWires;
 			
+	std::shared_ptr<CPinnedComponent>* mGrabbed = nullptr;
+	
+	bool mIn = false, mOut = false;
 
+	bool mPowerOn = false;
 	bool mWireMode = false;
 };
 

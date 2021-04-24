@@ -1,40 +1,16 @@
 #include "Wire.h"
 
-
-
 CWire::CWire() 
 {
 }
 
-void CWire::SetInputPin(CPinnedComponent::InputPin* pin)
-{
-	mInputPin = pin;
-	pin->AttachWire(this);
-}
-
-void CWire::SetOutputPin(CPinnedComponent::OutputPin* pin)
-{
-	mOutputPin = pin;
-	pin->AttachWire(this);
-}
-
 void CWire::Render(sf::RenderWindow& context)
 {
-	if (mInputPin != nullptr && mOutputPin != nullptr)
+	if (mIn != nullptr && mOut != nullptr)
 	{
 		sf::Vertex a, b;
-		a.position = mInputPin->GetPosition();
-		b.position = mOutputPin->GetPosition();
-		
-		// 
-		// FIX
-		// 
-
-		b.position.x += 40;
-		a.position.y += 5;
-		b.position.y += 5;
-		
-		//
+		a = sf::Vector2f(mOut->GetPosition().x + mOut->GetWidth(), mOut->GetPosition().y);
+		b = mIn->GetPosition();
 
 		if (!mState)
 		{
@@ -55,23 +31,9 @@ void CWire::Render(sf::RenderWindow& context)
 		
 		context.draw(line, 2, sf::Lines);		
 	}
+	
 }
 
 void CWire::PropogatePower(bool pow)
 {
-	std::cout << "Wire Powered!\n";
-	this->mState = true;
-	this->mInputPin->ReceivePower(pow);
-}
-
-bool CWire::Good()
-{
-	if (mInputPin != nullptr && mOutputPin != nullptr)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
 }

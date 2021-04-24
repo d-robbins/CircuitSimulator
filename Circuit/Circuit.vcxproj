@@ -147,14 +147,26 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="InPinVisitor.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OutPinVisitor.cpp" />
+    <ClCompile Include="Pin.cpp" />
+    <ClCompile Include="PinIn.cpp" />
     <ClCompile Include="PinnedComponent.cpp" />
+    <ClCompile Include="PinOut.cpp" />
+    <ClCompile Include="PinVisitor.cpp" />
     <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="InPinVisitor.h" />
+    <ClInclude Include="OutPinVisitor.h" />
+    <ClInclude Include="Pin.h" />
+    <ClInclude Include="PinIn.h" />
     <ClInclude Include="PinnedComponent.h" />
+    <ClInclude Include="PinOut.h" />
+    <ClInclude Include="PinVisitor.h" />
     <ClInclude Include="Wire.h" />
   </ItemGroup>
   <ItemGroup>

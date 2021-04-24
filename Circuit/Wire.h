@@ -2,7 +2,8 @@
 
 #include "SFML/Graphics.hpp"
 
-#include "PinnedComponent.h"
+#include "PinIn.h"
+#include "PinOut.h"
 
 #include <vector>
 
@@ -12,18 +13,18 @@ public:
 	CWire();
 	~CWire() {}
 
-	void SetInputPin(CPinnedComponent::InputPin* pin);
-	void SetOutputPin(CPinnedComponent::OutputPin* pin);
-
 	void Render(sf::RenderWindow& context);
 
 	void PropogatePower(bool power);
+	
+	void SetInputPin(CPinIn* pin) { mIn = pin; }
+	void SetOutPut(CPinOut* pin) { mOut = pin; }
 
-	bool Good();
+	bool Good() { return ((mIn != nullptr) && (mOut != nullptr)); }
 
 private:
-	CPinnedComponent::InputPin* mInputPin = nullptr;
-	CPinnedComponent::OutputPin* mOutputPin= nullptr;
+	CPinIn* mIn = nullptr; /// Power goes out wire into this pin
+	CPinOut* mOut = nullptr; /// Power goes through this pin into wire
 
 	bool mReadyToDraw = false;
 
