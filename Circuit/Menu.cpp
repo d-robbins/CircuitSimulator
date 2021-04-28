@@ -14,9 +14,13 @@ CMenu::CMenu(CBoard* board) : mBoard(board)
 	// Setup menu for board
 	mButtons.push_back(Button(mDefault, "AND", "../images/and-button.png"));
 	mButtons.push_back(Button(mDefault, "OR", "../images/or-button.png"));
-	mButtons.back().SetPosition(sf::Vector2f(100, 210));
-	mButtons.push_back(Button(mDefault, "TEST", "../images/test-button.png"));
-	mButtons.back().SetPosition(sf::Vector2f(100, 320));
+	mButtons.back().SetPosition(sf::Vector2f(0, 110));
+
+	mAND = std::make_shared<sf::Texture>();
+	mOR = std::make_shared<sf::Texture>();
+
+	mAND->loadFromFile("../images/and.png");
+	mOR->loadFromFile("../images/or.png");
 }
 
 void CMenu::Render(sf::RenderWindow& window)
@@ -44,13 +48,13 @@ void CMenu::OnClick(sf::Vector2f pos)
 	{
 		if (op == "AND")
 		{
-			auto comp = std::make_shared<CANDGate>(sf::Vector2f(200, 200), "../images/and.png");
+			auto comp = std::make_shared<CANDGate>(sf::Vector2f(200, 200), *(mAND.get()));
 
 			mBoard->AddComponent(comp);
 		}
 		else if (op == "OR")
 		{
-			auto comp = std::make_shared<CORGate>(sf::Vector2f(200, 200), "../images/or.png");
+			auto comp = std::make_shared<CORGate>(sf::Vector2f(200, 200), *(mOR.get()));
 			mBoard->AddComponent(comp);
 		}
 	}

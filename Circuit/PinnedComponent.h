@@ -12,6 +12,7 @@ class CPinnedComponent : public CComponent
 {
 public:
 	CPinnedComponent(sf::Vector2f pos, const std::string& fileLocation = "../images/default.png");
+	CPinnedComponent(sf::Vector2f pos, const sf::Texture& texture);
 	~CPinnedComponent() {}
 
 	virtual void Render(sf::RenderWindow& context) override;

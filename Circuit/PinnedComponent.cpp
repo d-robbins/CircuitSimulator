@@ -6,8 +6,12 @@
 CPinnedComponent::CPinnedComponent(sf::Vector2f pos, const std::string& fileLocation)
 	: CComponent(pos, fileLocation)
 {
-	mInLoc = sf::Vector2f(-GetWidth() / 2, 0);
-	mOutLoc = sf::Vector2f(GetWidth() / 2, 0);
+	
+}
+
+CPinnedComponent::CPinnedComponent(sf::Vector2f pos, const sf::Texture& texture)
+	: CComponent(pos, texture)
+{
 }
 
 void CPinnedComponent::Render(sf::RenderWindow& context)

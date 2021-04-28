@@ -35,7 +35,10 @@ public:
 
 private:
 	std::vector<Button> mButtons;
-	sf::Vector2f mDefault = sf::Vector2f(100, 100);
+	sf::Vector2f mDefault = sf::Vector2f(0, 0);
 	CBoard* mBoard = nullptr;
+
+	std::shared_ptr<sf::Texture> mAND;
+	std::shared_ptr<sf::Texture> mOR;
 };
 

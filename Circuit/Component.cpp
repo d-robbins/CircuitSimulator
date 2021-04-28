@@ -13,6 +13,12 @@ CComponent::CComponent(sf::Vector2f position, const std::string& fileLocation)
 	}
 }
 
+CComponent::CComponent(sf::Vector2f position, const sf::Texture& texture)
+{
+	mSprite.setPosition(position);
+	mSprite.setTexture(texture);
+}
+
 void CComponent::Render(sf::RenderWindow& context)
 {
 	context.draw(mSprite);

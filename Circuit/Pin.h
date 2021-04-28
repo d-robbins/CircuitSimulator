@@ -22,7 +22,7 @@ public:
 
 	virtual void Render(sf::RenderWindow& window);
 
-	int GetPinWidth() { return this->mShape.getGlobalBounds().width; }
+	float GetPinWidth() { return this->mShape.getGlobalBounds().width; }
 
 	sf::Vector2f GetPinComponentPos();
 

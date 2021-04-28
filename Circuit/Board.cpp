@@ -14,7 +14,7 @@ void CBoard::Render(sf::RenderWindow& window, sf::Event& evnt)
 {
 	if (mGrabbed != nullptr)
 	{
-		(*mGrabbed)->SetPosition(sf::Vector2f(evnt.mouseMove.x, evnt.mouseMove.y));
+		(*mGrabbed)->SetPosition(sf::Vector2f((float)evnt.mouseMove.x, (float)evnt.mouseMove.y));
 	}
 
 	for (auto i : mWires)

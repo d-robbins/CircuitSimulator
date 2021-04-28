@@ -1,56 +1,16 @@
-﻿  main.cpp
-C:\Users\David\source\repos\Circuit\Circuit\Pin.h(25,59): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\David\source\repos\Circuit\Circuit\main.cpp(39,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\David\source\repos\Circuit\Circuit\main.cpp(39,46): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\David\source\repos\Circuit\Circuit\main.cpp(40,50): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\David\source\repos\Circuit\Circuit\main.cpp(40,45): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
+﻿  Board.cpp
+  Component.cpp
+  InPinVisitor.cpp
+  Menu.cpp
+  OutPinVisitor.cpp
+  Pin.cpp
   PinIn.cpp
-C:\Users\David\source\repos\Circuit\Circuit\Pin.h(25,59): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
   PinOut.cpp
-C:\Users\David\source\repos\Circuit\Circuit\Pin.h(25,59): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
+  PinnedComponent.cpp
+  Wire.cpp
+  ANDGate.cpp
+  LogicGate.cpp
+  ORGate.cpp
+  main.cpp
   Generating Code...
   Circuit.vcxproj -> C:\Users\David\source\repos\Circuit\Debug\Circuit.exe

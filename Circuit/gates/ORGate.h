@@ -5,7 +5,7 @@
 class CORGate : public CLogicGate
 {
 public:
-	CORGate(sf::Vector2f pos, const std::string& fileLocation = "../images/default.png");
+	CORGate(sf::Vector2f pos, const sf::Texture& texture);
 	CORGate() = delete;
 	~CORGate() {}
 

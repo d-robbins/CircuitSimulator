@@ -36,8 +36,8 @@ int main()
             else if (event.type == sf::Event::MouseButtonPressed)
             {
                 sf::Vector2i p = sf::Mouse::getPosition(window);
-                board->OnClick(sf::Vector2f(p.x, p.y));
-                menu->OnClick(sf::Vector2f(p.x, p.y));
+                board->OnClick(sf::Vector2f((float)p.x, (float)p.y));
+                menu->OnClick(sf::Vector2f((float)p.x, (float)p.y));
             }
             else if (event.type == sf::Event::KeyPressed)
             {

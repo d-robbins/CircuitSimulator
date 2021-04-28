@@ -1,12 +1,12 @@
 #include "ORGate.h"
 
-CORGate::CORGate(sf::Vector2f pos, const std::string& fileLocation)
-	: CLogicGate(pos, fileLocation)
+CORGate::CORGate(sf::Vector2f pos, const sf::Texture& texture)
+	: CLogicGate(pos, texture)
 {
 	auto spacing = GetHeight() / 2;
-	CPinIn ipin1(sf::Vector2f(0, (GetHeight() / 2) - 20), this);
-	CPinIn ipin2(sf::Vector2f(0, (GetHeight() / 2) + 10), this);
-	CPinOut opin3(sf::Vector2f(GetWidth(), -5 + GetHeight() / 2), this);
+	CPinIn ipin1(sf::Vector2f(0.0f, (float)(GetHeight() / 2) - 20), this);
+	CPinIn ipin2(sf::Vector2f(0.0f, (float)(GetHeight() / 2) + 10), this);
+	CPinOut opin3(sf::Vector2f((float)GetWidth(), -5.0f + (float)GetHeight() / 2.0f), this);
 
 	this->AddInputPin(ipin1);
 	this->AddInputPin(ipin2);

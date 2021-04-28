@@ -7,6 +7,7 @@ class CLogicGate : public CPinnedComponent
 {
 public:
 	CLogicGate(sf::Vector2f pos, const std::string& fileLocation = "../images/default.png");
+	CLogicGate(sf::Vector2f pos, const sf::Texture& texture);
 	virtual ~CLogicGate() {}
 
 	virtual void ReceivePower(bool pow) override;

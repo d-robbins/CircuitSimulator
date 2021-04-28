@@ -10,6 +10,7 @@ class CComponent
 {
 public:
 	CComponent(sf::Vector2f position, const std::string& fileLocation = "../images/default.png");
+	CComponent(sf::Vector2f position, const sf::Texture& texture);
 	~CComponent() {}
 
 	virtual void Accept(CPinVisitor* visitor) {};
