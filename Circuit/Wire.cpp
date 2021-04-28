@@ -9,8 +9,16 @@ void CWire::Render(sf::RenderWindow& context)
 	if (mIn != nullptr && mOut != nullptr)
 	{
 		sf::Vertex a, b;
-		a = sf::Vector2f(mOut->GetPosition().x + mOut->GetWidth(), mOut->GetPosition().y);
-		b = mIn->GetPosition();
+
+		auto opp = mOut->GetPinPos();
+		auto ipp = mIn->GetPinPos();
+		auto ocp = mOut->GetPinComponentPos();
+		auto icp = mIn->GetPinComponentPos();
+		auto wid = mOut->GetPinWidth();
+		a = sf::Vector2f(opp.x + ocp.x + wid 
+			, mOut->GetPinComponentPos().y + mOut->GetPinPos().y);
+
+		b = mIn->GetPinComponentPos() + mIn->GetPinPos();
 
 		if (!mState)
 		{

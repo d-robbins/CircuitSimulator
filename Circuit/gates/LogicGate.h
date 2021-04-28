@@ -11,7 +11,11 @@ public:
 
 	virtual void ReceivePower(bool pow) override;
 
+	void SetState(bool val) {mState = val;}
+	bool GetState() const {return mState;}
+
 private:
 	bool mLogicGood = false;
+	bool mState = false;
 };
 

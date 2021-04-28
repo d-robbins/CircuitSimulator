@@ -4,25 +4,24 @@
 #include "Board.h"
 #include "Component.h"
 #include "Wire.h"
-#include "gates/ANDGate.h"
+
+#include "Menu.h"
 
 int main()
 {
-
     std::cout << sizeof(double) << std::endl;
+    sf::View view(sf::FloatRect(0, 0, 1280, 720));
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Circuit Sim");
 
     window.setFramerateLimit(60);
 
+    window.setView(view);
+
     const auto white = sf::Color(255, 255, 255, 255);
 
-    std::shared_ptr<CBoard> board = std::make_shared<CBoard>();
+    auto board = std::make_shared<CBoard>();
+    auto menu = std::make_shared<CMenu>(board.get());
 
-    CWire wire;
-
-    auto comp = std::make_shared<CPinnedComponent>(sf::Vector2f(500, 500));
-    comp->AddOutputPin();
-    board->AddComponent(comp);
 
     bool toggle = false;
     bool powerToggle = false;
@@ -36,8 +35,9 @@ int main()
                 window.close();
             else if (event.type == sf::Event::MouseButtonPressed)
             {
-                auto pos = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
-                board->OnClick(pos);
+                sf::Vector2i p = sf::Mouse::getPosition(window);
+                board->OnClick(sf::Vector2f(p.x, p.y));
+                menu->OnClick(sf::Vector2f(p.x, p.y));
             }
             else if (event.type == sf::Event::KeyPressed)
             {
@@ -45,21 +45,9 @@ int main()
                 {
                     board->WireMode(!toggle);
                 }
-                else if (event.key.code == sf::Keyboard::Q)
-                {
-                    auto comp = std::make_shared<CPinnedComponent>(sf::Vector2f(100, 100));
-                    comp->AddInputPin();
-                    comp->AddOutputPin();
-                    board->AddComponent(comp);
-                }
                 else if (event.key.code == sf::Keyboard::G)
                 {
                     board->PowerToggle(!powerToggle);
-                }
-                else if (event.key.code == sf::Keyboard::A)
-                {
-                    auto comp = std::make_shared<CANDGate>(sf::Vector2f(100, 100), "../images/and.png");
-                    board->AddComponent(comp);
                 }
                 else if (event.key.code == sf::Keyboard::Escape)
                 {
@@ -70,6 +58,7 @@ int main()
 
         window.clear(white);
         board->Render(window, event);
+        menu->Render(window);
         window.display();
     }
 

@@ -14,10 +14,7 @@ public:
 
 	virtual void Accept(CPinVisitor* visitor) {};
 
-	virtual void SetPosition(const sf::Vector2f& pos)
-	{
-		mSprite.setPosition(pos);
-	}
+	virtual void SetPosition(const sf::Vector2f& pos) {mSprite.setPosition(pos);}
 
 	void DisplayPosition() const
 	{
@@ -37,11 +34,17 @@ public:
 	int GetHeight() const { return mSprite.getTextureRect().height; }
 	int GetWidth() const { return mSprite.getTextureRect().width; }
 
+	bool IsMovable() const { return mMovable; }
+	void SetMovable(bool val) { mMovable = val; }
+
+	sf::FloatRect GetBounds() { return mSprite.getGlobalBounds(); }
 private:
 	/// Sprite for this component
 	sf::Sprite mSprite;
 
 	/// Texture for this sprite
 	sf::Texture mTexture;
+
+	bool mMovable = true;
 };
 

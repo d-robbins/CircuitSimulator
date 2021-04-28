@@ -54,6 +54,12 @@
     <ClCompile Include="gates\LogicGate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gates\ORGate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -90,6 +96,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gates\LogicGate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gates\ORGate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -41,7 +41,7 @@ void CBoard::OnClick(const sf::Vector2f& mousePos)
 		{
 			for (auto &comp : mComponents)
 			{
-				if (comp->HitTest(mousePos))
+				if (comp->HitTest(mousePos) && comp->IsMovable())
 				{
 					mGrabbed = &comp;
 					break;
@@ -113,13 +113,14 @@ void CBoard::AddWire(sf::Vector2f mousePos)
 
 	if (ipin != nullptr)
 	{
-		mWires.back()->SetInputPin(ipin);
+		mWires.back()->PowerOut(ipin);
 	}
 
 	if (opin != nullptr)
 	{
 		opin->AddWire(mWires.back());
 	}
+
 
 	mWireMode = !mWires.back()->Good();
 }

@@ -16,8 +16,8 @@ public:
 
 	virtual void Render(sf::RenderWindow& context) override;
 
-	void AddInputPin(sf::Vector2f pos = sf::Vector2f(0, 0));
-	void AddOutputPin(sf::Vector2f pos = sf::Vector2f(0, 0));
+	void AddInputPin(CPinIn pin);
+	void AddOutputPin(CPinOut pin);
 
 	bool InPinHitTest(sf::Vector2f pos);
 	bool OutPinHitTest(sf::Vector2f pos);
@@ -31,16 +31,14 @@ public:
 	CPinIn* GetLIn() { return mLIn; }
 
 protected:
-	std::vector<std::shared_ptr<CPinIn>> GetInputPins() { return mInputPins; }
+	std::vector<CPinIn> GetInputPins() { return mInputPins; }
 private:
-	void UpdatePin();
-
 	CPinIn* mLIn = nullptr;
 	CPinOut* mLOut = nullptr;
 
 	sf::Vector2f mInLoc, mOutLoc;
 	
-	std::vector<std::shared_ptr<CPinIn>> mInputPins;
-	std::vector<std::shared_ptr<CPinOut>> mOutputPins;
+	std::vector<CPinIn> mInputPins;
+	std::vector<CPinOut> mOutputPins;
 };
 

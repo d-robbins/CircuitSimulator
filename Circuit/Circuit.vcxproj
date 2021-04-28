@@ -151,6 +151,8 @@
     <ClCompile Include="InPinVisitor.cpp" />
     <ClCompile Include="gates\LogicGate.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="gates\ORGate.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OutPinVisitor.cpp" />
     <ClCompile Include="Pin.cpp" />
     <ClCompile Include="PinIn.cpp" />
@@ -165,6 +167,8 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="InPinVisitor.h" />
     <ClInclude Include="gates\LogicGate.h" />
+    <ClInclude Include="gates\ORGate.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="OutPinVisitor.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="PinIn.h" />

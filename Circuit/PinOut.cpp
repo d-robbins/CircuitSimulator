@@ -4,10 +4,10 @@
 
 #include "Wire.h"
 
-CPinOut::CPinOut(sf::Vector2f position, const std::string& fileLocation) 
-	: CPin(position, fileLocation)
+CPinOut::CPinOut(sf::Vector2f position, CPinnedComponent* comp)
+	: CPin(position, comp)
 {
-	this->SetColor(sf::Color::Red);
+	SetPinColor(sf::Color::Red);
 }
 
 void CPinOut::ProcessPower(bool power)
@@ -21,5 +21,5 @@ void CPinOut::ProcessPower(bool power)
 void CPinOut::AddWire(std::shared_ptr<CWire> wire)
 {
 	mWires.push_back(wire);
-	mWires.back()->SetOutPut(this);
+	wire->PowerIn(this);
 }

@@ -8,7 +8,7 @@ class CWire;
 class CPinOut : public CPin
 {
 public:
-	CPinOut(sf::Vector2f position, const std::string& fileLocation = "../images/default.png");
+	CPinOut(sf::Vector2f position, CPinnedComponent* comp);
 	~CPinOut() {}
 
 	virtual void ProcessPower(bool power) override;
